@@ -1,0 +1,34 @@
+{
+  "students": [
+    {
+      "name": "Akash",
+      "age": 23
+    },
+    {
+      "name": "Peter",
+      "age": 30
+    },
+    {
+      "id": 1738249345746,
+      "createdAt": "2025-01-30T15:02:25.746Z",
+      "name": "shraddha",
+      "email": "shraddha@gmai.com"
+    },
+    {
+      "id": 1738249516125,
+      "createdAt": "2025-01-30T15:05:16.126Z",
+      "name": "shraddh1a"
+    },
+    {
+      "id": 1738249556663,
+      "createdAt": "2025-01-30T15:05:56.663Z",
+      "name": "shraddh1a",
+      "email": "shraddh1a.com"
+    },
+    {
+      "id": 1738249635981,
+      "createdAt": "2025-01-30T15:07:15.981Z",
+      "name": "shraddh1a"
+    }
+  ]
+}
