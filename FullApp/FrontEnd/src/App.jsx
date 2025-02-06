@@ -1,22 +1,13 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Signup } from './components/Signup'
-import { Login } from './components/Login'
-import { Notes } from './components/Dashboard'
-import './App.css'
-import { CreateNote } from './components/CreateNote'
+import { Outlet } from "react-router-dom"; // ✅ Import Outlet
+import './App.css';
 
 function App() {
-
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/register" element = {<Signup/>}/>
-        <Route path="/login" element = {<Login/>}/>
-        <Route path="/createnote" element = {<CreateNote/>}/>
-        <Route path="/notes" element = {<Notes/>}/>
-      </Routes>
-    </BrowserRouter>
-  )
+    <div>
+      <h1>My Notes App</h1>
+      <Outlet /> 
+    </div>
+  );
 }
 
-export default App
+export default App;
