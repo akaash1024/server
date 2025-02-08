@@ -21,8 +21,8 @@ const orderSchema = new mongoose.Schema(
   }
 );
 
-// Automatically calculate totalprice before saving the order
-orderSchema.pre("save", function (next) {
+
+orderSchema.pre("validate", function (next) {
   this.totalprice = this.products.reduce((total, product) => {
     return total + product.price * product.qty;
   }, 0);

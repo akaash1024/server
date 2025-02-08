@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { register } from "../AuthStore";
 
 const Signup2 = () => {
   const [name, setName] = useState("");
@@ -10,10 +11,7 @@ const Signup2 = () => {
     const payload = { name, email, pass };
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/users/register",
-        payload
-      );
+      const response = await register(payload)
       console.log(response.data);
       alert(response.data.msg);
     } catch (error) {
