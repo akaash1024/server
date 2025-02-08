@@ -10,14 +10,10 @@ const app = express();
 app.use(express.json());
 app.use(logger);
 
+// ! updating here
 const staticPath = path.join(__dirname, "public");
-
 app.use(express.static(staticPath));
 
-app.get("/", (req, res) => {
-  const staticHomePage = path.join(__dirname, "public", "index.html");
-  res.sendFile(staticHomePage);
-});
 
 app.post("/", validation, (req, res) => {
   try {
