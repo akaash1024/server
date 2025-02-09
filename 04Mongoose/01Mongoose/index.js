@@ -9,14 +9,10 @@ const { loggerMiddleware } = require("./middleware/loggerMiddleware");
 const app = express();
 
 app.use(loggerMiddleware);
-const staticFilePath = path.join(__dirname, "public");
-app.use(express.static(staticFilePath));
+
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  const homepagePath = path.join(__dirname, "public", "index.html");
-  res.sendFile(homepagePath);
-});
 
 app.use("/movies", movieRouter);
 
@@ -24,7 +20,7 @@ app.listen(PORT, async () => {
   try {
     await mongoose.connect("mongodb://127.0.0.1:27017/dbCinema");
     console.log(`Connected to Database`);
-    console.log(`Server is listening at ⚙️http://localhost:${PORT}/`);
+    console.log(`Server is listening at ⚙️ http://localhost:${PORT}/`);
   } catch (error) {
     console.log(`something went wrong`, error.message);
   }

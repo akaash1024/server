@@ -12,8 +12,7 @@ const orderRouter = require("./routes/order.route");
 // ! middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-const staticRoute = path.join(__dirname, "..", "public");
-app.use(express.static(staticRoute));
+app.use(express.static(path.join(__dirname, "..", "public")));
 
 
 // ? Router

@@ -29,6 +29,9 @@ const bodySchema = z.object({
 const validation = (req, res, next) => {
   const result = bodySchema.safeParse(req.body);
 
+
+  // TODO
+  
   if (!result.success) {
     return res.status(400).json({
       status: "error",

@@ -27,12 +27,8 @@ const studentsData = [
   { name: "Kabir", grade: "11th" },
 ];
 app.get("/", (req, res)=>{
-  res.sendFile(path.join(__dirname, "views", "index.html"))
-})
-
-app.get("/report", (req, res) => {
   res.render("report", { student: studentsData });
-});
+})
 
 
 app.use((req, res)=>{
