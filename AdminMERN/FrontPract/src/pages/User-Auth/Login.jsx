@@ -36,14 +36,19 @@ export const Login = () => {
       if (data.success && data.data.token) {
         storeTokenInLS(data.data.token);
         setUser({ email: "", password: "" });
-        toast.success("Login successful");
+
+        // toast.success("Login successful frontend");
+        toast.success(data.message); // ! now getting from backend
+        
         navigate("/");
       } else {
         toast.error(data.message || "Invalid email or password");
       }
     } catch (error) {
       console.error("Login error:", error);
-      toast.error(error.response?.data?.message || "Login failed. Please try again.");
+      toast.error(
+        error.response?.data?.message || "Login failed. Please try again."
+      );
     }
   };
 
@@ -53,7 +58,12 @@ export const Login = () => {
         <div className="section-registration">
           <div className="container grid grid-two-cols">
             <div className="registration-image">
-              <img src="/images/login.png" alt="Let's fill the login form" width="500" height="500" />
+              <img
+                src="/images/login.png"
+                alt="Let's fill the login form"
+                width="500"
+                height="500"
+              />
             </div>
 
             <div className="registration-form">
@@ -89,7 +99,9 @@ export const Login = () => {
                 </div>
 
                 <br />
-                <button type="submit" className="btn btn-submit">Login</button>
+                <button type="submit" className="btn btn-submit">
+                  Login
+                </button>
               </form>
             </div>
           </div>

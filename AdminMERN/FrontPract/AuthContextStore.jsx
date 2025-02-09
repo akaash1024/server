@@ -29,6 +29,7 @@ export const AuthProvider = ({ children }) => {
   // Axios instance with request interceptor
   const api = axios.create({
     baseURL: API,
+    headers: { "Content-Type": "application/json" },
   });
 
   api.interceptors.request.use((config) => {
@@ -60,8 +61,7 @@ export const AuthProvider = ({ children }) => {
   const getServices = async () => {
     try {
       const response = await axios.get(`${API}/api/data/service`);
-      console.log(response.data.msg);
-      setServices(response.data.msg);
+      setServices(response.data.service_data);
     } catch (error) {
       console.error(`Services frontend error: ${error}`);
     }
@@ -70,8 +70,8 @@ export const AuthProvider = ({ children }) => {
   // Use effect to refetch data when token changes
   useEffect(() => {
     if (token) {
-      userAuthentication();
-    }
+      userAuthentication();  // ! need to solve this part after evalution line, 35-41
+    } 
     getServices();
   }, [token]);
 
