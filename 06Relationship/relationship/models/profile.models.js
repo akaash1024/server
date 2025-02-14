@@ -11,7 +11,7 @@ const profileSchema = new mongoose.Schema(
         message: "Age should be between 18 to 65",
       },
     },
-    location: { type: String, required: true }, 
+    location: { type: String, required: true },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -21,8 +21,20 @@ const profileSchema = new mongoose.Schema(
   {
     versionKey: false,
     timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
+
+
+
+profileSchema.virtual("profile_virtual", {
+  ref: "User",
+  localField: "userId",
+  foreignField: "_id"
+})
+
+
 
 const Profile = mongoose.model("Profile", profileSchema);
 module.exports = Profile;

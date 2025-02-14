@@ -6,22 +6,22 @@ const orderRouter = express.Router();
 // Route to get all orders
 orderRouter.get("/", async (req, res) => {
   try {
-    const orders = await Order.find(); // Fetch all orders from the database
-    res.status(200).send(orders); // Send the orders as the response
+    const orders = await Order.find({}).populate("User_virtual").select("-createdAt -updatedAt");
+    res.status(200).json(orders);
   } catch (error) {
-    res.status(500).send({ msg: error.message }); // Send error response
+    res.status(500).json({ message: error.message });
   }
 });
 
 // Route to create a new order
 orderRouter.post("/", async (req, res) => {
   try {
-    const newOrder = new Order(req.body); // Create a new instance of OrderModel with request data
-    await newOrder.save(); // Save the new order to the database
-    res.status(201).send({ msg: `Order is created` }, newOrder); // Send success response
+    const newOrder = new Order(req.body);
+    await newOrder.save();
+    res.status(201).json({ message: `Order is created`, order: newOrder },);
   } catch (error) {
-    res.status(500).send({ msg: error.message }); // Send error response
+    res.status(500).json({ message: error.message });
   }
 });
 
-module.exports =  orderRouter ;
+module.exports = orderRouter;

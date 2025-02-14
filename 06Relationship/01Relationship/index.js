@@ -7,7 +7,7 @@ const { orderRouter } = require("./routes/order.routes");
 
 const app = express();
 app.use(express.json());
-app.get("/", (req, res)=>res.send({"msg":"Hello world"}))
+app.get("/", (req, res)=>res.send({"message":"Hello world"}))
 
 app.use("/users", userRouter);
 app.use("/profiles", profileRouter);

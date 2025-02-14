@@ -4,20 +4,22 @@ const profileRouter = express.Router();
 
 profileRouter.get("/", async (req, res) => {
   try {
-    const profiles = await Profile.find();
-    res.status(200).send(profiles);
+    const profiles = await Profile.find({}).populate("profile_virtual").select("-createdAt -updatedAt");
+    res.status(200).json(profiles);
   } catch (error) {
-    res.status(500).send({ msg: error.message });
+    res.status(500).json({ message: error.message });
   }
 });
 
 profileRouter.post("/", async (req, res) => {
+  const { username, age, location, userId } = req.body
   try {
-    const newProfile = new Profile(req.body);
-    await newProfile.save();
-    res.status(201).send({ msg: `Profile is created` }, newProfile);
+    const newProfile = await Profile.create({ username, age, location, userId });
+    if (newProfile) {
+      res.status(201).json({ message: `Profile is created`, profile: newProfile });
+    }
   } catch (error) {
-    res.status(500).send({ msg: error.message });
+    res.status(500).json({ message: error.message });
   }
 });
 

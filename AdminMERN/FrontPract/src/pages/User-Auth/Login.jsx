@@ -11,7 +11,7 @@ export const Login = () => {
   });
 
   const navigate = useNavigate();
-  const { storeTokenInLS, API } = useAuth();
+  const { storeTokenInLS, API, token } = useAuth();
   const URL = `${API}/api/auth/login`;
 
   // Handling input changes
@@ -27,22 +27,28 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(URL, user, {
+      const data = await axios.post(URL, user, {
         headers: { "Content-Type": "application/json" },
       });
 
       console.log("Response from server:", data); // ✅ Log response for debugging
+      
+      
 
-      if (data.success && data.data.token) {
-        storeTokenInLS(data.data.token);
+      if (data.data.success && data.data.data.token) {
+        storeTokenInLS(data.data.data.token);
+        
+        
+        console.log("then this line is this line");
+
         setUser({ email: "", password: "" });
 
         // toast.success("Login successful frontend");
-        toast.success(data.message); // ! now getting from backend
-        
+        toast.success(data.data.message); // ! now getting from backend
+
         navigate("/");
       } else {
-        toast.error(data.message || "Invalid email or password");
+        toast.error(data.data.message || "Invalid email or password");
       }
     } catch (error) {
       console.error("Login error:", error);

@@ -8,7 +8,7 @@ orderRouter.get("/", async (req, res) => {
     const orders = await OrderModel.find(); // Fetch all orders from the database
     res.status(200).send(orders); // Send the orders as the response
   } catch (error) {
-    res.status(500).send({ msg: error.message }); // Send error response
+    res.status(500).send({ message: error.message }); // Send error response
   }
 });
 
@@ -17,9 +17,9 @@ orderRouter.post("/", async (req, res) => {
   try {
     const newOrder = new OrderModel(req.body); // Create a new instance of OrderModel with request data
     await newOrder.save(); // Save the new order to the database
-    res.status(201).send({ msg: `Order is created` }, newOrder); // Send success response
+    res.status(201).send({ message: `Order is created` }, newOrder); // Send success response
   } catch (error) {
-    res.status(500).send({ msg: error.message }); // Send error response
+    res.status(500).send({ message: error.message }); // Send error response
   }
 });
 

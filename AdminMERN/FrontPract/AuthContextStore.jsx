@@ -32,21 +32,32 @@ export const AuthProvider = ({ children }) => {
     headers: { "Content-Type": "application/json" },
   });
 
-  api.interceptors.request.use((config) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  });
+  // api.interceptors.request.use((config) => {
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     config.headers.Authorization = `Bearer ${token}`;
+  //   }
+  //   return config;
+  // });
 
   // Fetch user authentication
   const userAuthentication = async () => {
+    console.log("Akash step 1");
+
     try {
       setIsLoading(true);
-      const response = await api.get("/api/auth/user");
+      console.log("Akash step 2");
+      const response = await api.get("/api/auth/user", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log("Akash step 3");
       console.log("Userdata", response.data.data);
+      console.log("Akash step 4");
       setUser(response.data.data);
+      console.log("Akash step 5");
     } catch (error) {
       console.error("Error fetching user data", error);
       setUser(null);
@@ -70,8 +81,8 @@ export const AuthProvider = ({ children }) => {
   // Use effect to refetch data when token changes
   useEffect(() => {
     if (token) {
-      userAuthentication();  // ! need to solve this part after evalution line, 35-41
-    } 
+      userAuthentication(); // ! need to solve this part after evalution line, 35-41
+    }
     getServices();
   }, [token]);
 
@@ -86,6 +97,7 @@ export const AuthProvider = ({ children }) => {
         isLoading,
         API,
         authorizationToken,
+        token,
       }}
     >
       {children}

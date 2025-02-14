@@ -19,8 +19,20 @@ const orderSchema = new mongoose.Schema(
   {
     versionKey: false,
     timestamps: true,
+    toJSON:{virtuals:true},
+    toObject:{virtuals:true},
+    
   }
 );
+
+
+orderSchema.virtual("User_virtual",{
+  ref: "User",
+  localField: "userId",
+  foreignField:"_id"
+})
+
+
 
 orderSchema.pre("validate", function (next) {
   this.totalprice = this.products.reduce((total, product) => {
