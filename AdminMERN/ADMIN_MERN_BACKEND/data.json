@@ -1,0 +1,62 @@
+[
+  {
+    "service": "Web Development",
+    "description": "Full-stack web development with React and Node.js",
+    "price": "$1200",
+    "provider": "Tech Solutions Inc."
+  },
+  {
+    "service": "Graphic Design",
+    "description": "Professional logo and branding design",
+    "price": "$500",
+    "provider": "Creative Studio"
+  },
+  {
+    "service": "SEO Optimization",
+    "description": "Improve website ranking on search engines",
+    "price": "$300",
+    "provider": "SEO Experts Ltd."
+  },
+  {
+    "service": "Content Writing",
+    "description": "High-quality blog posts and website content",
+    "price": "$150 per article",
+    "provider": "WriteWell Agency"
+  },
+  {
+    "service": "Social Media Marketing",
+    "description": "Manage and grow social media presence",
+    "price": "$700 per month",
+    "provider": "Social Boost Co."
+  },
+  {
+    "service": "Cybersecurity Audit",
+    "description": "Comprehensive security analysis and recommendations",
+    "price": "$1800",
+    "provider": "SecureNet Solutions"
+  },
+  {
+    "service": "App Development",
+    "description": "Custom mobile applications for iOS and Android",
+    "price": "$5000",
+    "provider": "Mobile Devs Ltd."
+  },
+  {
+    "service": "Video Editing",
+    "description": "Professional video editing for commercials and vlogs",
+    "price": "$250 per video",
+    "provider": "VFX Creators"
+  },
+  {
+    "service": "Virtual Assistant",
+    "description": "Administrative support and task management",
+    "price": "$15 per hour",
+    "provider": "VA Services Pro"
+  },
+  {
+    "service": "Cloud Hosting",
+    "description": "Reliable and secure cloud hosting solutions",
+    "price": "$100 per month",
+    "provider": "CloudTech Hosting"
+  }
+]
