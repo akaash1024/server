@@ -47,16 +47,16 @@ export const AuthProvider = ({ children }) => {
     try {
       setIsLoading(true);
       console.log("Akash step 2");
-      const response = await api.get("/api/auth/user", {
+      const { data } = await api.get("/api/auth/user", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
       console.log("Akash step 3");
-      console.log("Userdata", response.data.data);
+      console.log("Userdata", data.data);
       console.log("Akash step 4");
-      setUser(response.data.data);
+      setUser(data.data);
       console.log("Akash step 5");
     } catch (error) {
       console.error("Error fetching user data", error);
