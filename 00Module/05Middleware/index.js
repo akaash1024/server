@@ -1,8 +1,10 @@
 const express = require("express");
-const { loggerMiddleware } = require("./middleware/middleware");
 const fs = require("fs/promises");
 const path = require("path");
+
+// ! this is need to check after a while
 const errorMiddleware = require("./middleware/error.middleware");
+const { loggerMiddleware } = require("./middleware/middleware");
 
 const app = express();
 const PORT = process.env.PORT;

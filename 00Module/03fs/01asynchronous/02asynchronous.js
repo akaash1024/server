@@ -4,6 +4,13 @@ const path = require("path");
 const fileName = "async.txt";
 const filePath = path.join(__dirname, fileName);
 
+/*
+fs.writeFile(fileName, "this is intial Data", (err, res)=>{
+    if(err) console.log(err)
+    console.log("created")
+})
+*/
+
 const writeFs = () => {
   fs.writeFile("async.txt", "This is data", (err, res) => {
     if (err) {

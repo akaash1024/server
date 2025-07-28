@@ -7,6 +7,6 @@ const userCollection = {
 
 const profileCollection = {
   _id: "akash.kevat",
-  bio: "Software Developer",
+  bio: "Software Engineer",
   social: "@akash",
 };
