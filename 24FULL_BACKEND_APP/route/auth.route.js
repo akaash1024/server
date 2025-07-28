@@ -18,6 +18,8 @@ authRoute.get("/set-cookie", (req, res) => {
     res.json({ message: "Cookie has been set" });
 });
 
+*/
+
 authRoute.get("/set-cookie", (req, res) => {
     res.cookie("token", "0rx30pt6jh", {
         httpOnly: true,
@@ -27,7 +29,7 @@ authRoute.get("/set-cookie", (req, res) => {
     res.send("Cookie set for 1 minute");
 });
 
- */
+ 
 
 
 authRoute.route("/register").post(validate(registerSchema), authController.register);

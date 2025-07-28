@@ -6,10 +6,11 @@ const errorHandler = require("./utils/errorHandler");
 const authRoute = require("./route/auth.route");
 const cors = require("cors");
 const helmet = require("helmet");
-const rateLimit = require("express-rate-limit");
+
 const morgan = require("morgan");
 
 const cookieParser = require("cookie-parser");
+
 
 
 const app = express();
@@ -22,12 +23,7 @@ app.use(cookieParser());
 
 app.use(morgan("dev"));
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100,
-  message: "Too many requests from this IP, try again later.",
-});
-app.use("/api/auth", limiter);
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -39,6 +35,8 @@ app.get("/", (req, res) => {
 
 // Routes
 app.use("/api/auth", authRoute);
+
+
 
 // Global Error Handler
 app.use(errorHandler);
