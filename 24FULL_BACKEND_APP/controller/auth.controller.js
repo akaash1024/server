@@ -1,30 +1,52 @@
-const User = require("../model/auth.model")
+const User = require("../model/auth.model");
+const uploadOnCloudinary = require("../utils/cloudinary");
 
 
 const register = async (req, res, next) => {
+    console.log(req.body);
+    
     try {
-        const { username, email, phone, password } = req.body;
+        const { name, email, password, role } = req.body;
+
         const isUserExist = await User.findOne({ email });
+        console.log("here");
+        
 
         if (isUserExist) {
             return res.status(400).json({ success: false, message: "Email is already registered" });
         }
 
-        const newUser = await User.create({ username, email, phone, password });
+        const avatarLocalPath = req.file?.path;
+        if (!avatarLocalPath) {
+            return res.status(400).json({ message: "Avatar file is required" });
+        }
+
+        const avatar = await uploadOnCloudinary(avatarLocalPath);
+        if (!avatar) {
+            return res.status(500).json({ message: "Failed to upload avatar" });
+        }
+
+        const newUser = await User.create({
+            name,
+            email,
+            password,
+            role,
+            avatar: avatar.url
+        });
+
         const token = await newUser.generateToken();
 
-        // Set token in HTTP-only cookie
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false, // true in production (HTTPS)
+            secure: false, // change to true in production
             sameSite: "Strict",
-            maxAge: 24 * 60 * 60 * 1000,
+            maxAge: 24 * 60 * 60 * 1000, // 1 day
         });
 
         return res.status(201).json({
             success: true,
             message: "Account created successfully",
-            userId: newUser._id.toString(), // optional
+            userId: newUser._id.toString(),
         });
 
     } catch (error) {
@@ -33,10 +55,14 @@ const register = async (req, res, next) => {
 };
 
 
+
 const login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
-        const isUserExist = await User.findOne({ email });
+        const isUserExist = await User.findOne({ email }).select("+password");
+
+        console.log(isUserExist);
+        
 
         if (!isUserExist) {
             return res.status(400).json({ success: false, message: "Invalid credentials" });

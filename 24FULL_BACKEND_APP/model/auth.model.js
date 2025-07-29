@@ -5,18 +5,23 @@ const jwt = require("jsonwebtoken")
 
 const userSchema = new mongoose.Schema(
     {
-        username: { type: String, required: true },
+        name: { type: String, required: true },
         email: { type: String, unique: true },
-        password: { type: String, required: true },
+        password: { type: String, required: true, select: false },
+        role: { type: String, enum: ["admin", "member"], default: "member" },
         isAdmin: { type: Boolean, default: false },
-        phone: { type: String, required: true }
+        avatar: { type: String, required: true },
+        borrowedBooks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Book" },],
     },
     {
         versionKey: false,
         timestamps: true,
-        toJSON: { virtuals: true }
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true }
     }
 )
+
+
 
 
 userSchema.pre("save", async function (next) {
@@ -33,8 +38,9 @@ userSchema.pre("save", async function (next) {
     }
 })
 
-
 userSchema.methods.comparePassword = async function (password) {
+    console.log(this.password);
+
     return bcrypt.compare(password, this.password)
 }
 

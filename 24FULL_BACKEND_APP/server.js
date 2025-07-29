@@ -10,6 +10,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 
 const cookieParser = require("cookie-parser");
+const authorRoute = require("./route/author.route");
 
 
 
@@ -35,7 +36,11 @@ app.get("/", (req, res) => {
 
 // Routes
 app.use("/api/auth", authRoute);
-
+// app.use("/api/author", authorRoute);
+// app.use("/api/book", bookRoute);
+// app.use("/api/borrowed-book", borrowedBookRoute);
+// 
+// app.use("/api/admin", adminRoute)
 
 
 // Global Error Handler
